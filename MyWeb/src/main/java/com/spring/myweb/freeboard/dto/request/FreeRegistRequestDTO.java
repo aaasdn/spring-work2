@@ -12,8 +12,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FreeRegistRequestDTO {
-
+	
 	private String title;
 	private String content;
 	private String writer;
+
 }
+
+
+
+
+
+

@@ -17,17 +17,17 @@
                     
                     <!--form select를 가져온다 -->
             <form action="/myweb/freeboard/freeList">
-                <div class="search-wrap">
-                       <button type="submit" class="btn btn-info search-btn">검색</button>
-                       <input type="text" name="keyword" class="form-control search-input" value="${pc.page.keyword}">
-                       <select name="condition" class="form-control search-select">
-                            <option value="title" ${pc.page.condition == 'title' ? 'selected' : ''}>제목</option>
-                            <option value="content"${pc.page.condition == 'content' ? 'selected' : ''}>내용</option>
-                            <option value="writer"${pc.page.condition == 'writer' ? 'selected' : ''}>작성자</option>
-                            <option value="titleContent"${pc.page.condition == 'titleContent' ? 'selected' : ''}>제목+내용</option>
-                       </select>
-                    </div>
-          </form>
+	    		<div class="search-wrap">
+                      <button type="submit" class="btn btn-info search-btn">검색</button>
+                      <input type="text" name="keyword" class="form-control search-input" value="${pc.page.keyword}">
+                      <select name="condition" class="form-control search-select">
+                           <option value="title" ${pc.page.condition == 'title' ? 'selected' : ''}>제목</option>
+                           <option value="content" ${pc.page.condition == 'content' ? 'selected' : ''}>내용</option>
+                           <option value="writer" ${pc.page.condition == 'writer' ? 'selected' : ''}>작성자</option>
+                           <option value="titleContent" ${pc.page.condition == 'titleContent' ? 'selected' : ''}>제목+내용</option>
+                      </select>
+                   </div>
+		    </form>
                    
                     <table class="table table-bordered">
                         <thead>
@@ -39,13 +39,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <c:forEach var="vo" items="${boardList}">
-                               <tr>
-                                   <td>${vo.bno}</td>
-                                   <td><a href="/myweb/freeboard/content?bno=${vo.bno}&pageNo=${pc.page.pageNo}&amount=${pc.page.amount}&keyword=${pc.page.keyword}&condition=${pc.page.condition}">${vo.title}</a></td>
-                                   <td>${vo.writer}</td>
-                                   <td>${vo.date}</td>
-                               </tr>
+                        	<c:forEach var="vo" items="${boardList}">
+	                            <tr>
+	                                <td>${vo.bno}</td>
+	                                <td>
+	                                	<a href="/myweb/freeboard/content?bno=${vo.bno}&pageNo=${pc.page.pageNo}&amount=${pc.page.amount}&keyword=${pc.page.keyword}&condition=${pc.page.condition}">${vo.title}</a>
+	                                </td>
+	                                <td>${vo.writer}</td>
+	                                <td>${vo.date}</td>
+	                            </tr>
                             </c:forEach>
                         </tbody>
                         
@@ -53,50 +55,49 @@
 
 
                     <!--페이지 네이션을 가져옴-->
-          <form action="/myweb/freeboard/freeList" name="pageForm">
-                    <div class="text-center">
+		    <form action="/myweb/freeboard/freeList" name="pageForm">
+                <div class="text-center">
                     <hr>
                     <ul id="pagination" class="pagination pagination-sm">
-                       <c:if test="${pc.prev}">
-                           <li><a href="#" data-pagenum="${pc.begin-1}">이전</a></li>
+                        <c:if test="${pc.prev}">
+                            <li><a href="#" data-pagenum="${pc.begin-1}">이전</a></li>
                         </c:if>
                         
-                        <c:forEach var="num" begin="${pc.begin}" end="${pc.end}" step="1">
-                           <li class="${pc.page.pageNo == num ? 'active' : ''}"><a href="#" data-pagenum="${num}">${num}</a></li>
+                        <c:forEach var="num" begin="${pc.begin}" end="${pc.end}">               
+                            <li class="${pc.page.pageNo == num ? 'active' : ''}"><a href="#" data-pagenum="${num}">${num}</a></li>
                         </c:forEach>
                         
                         <c:if test="${pc.next}">
-                           <li><a href="#" data-pagenum="${pc.end+1}">다음</a></li>
+                            <li><a href="#" data-pagenum="${pc.end+1}">다음</a></li>
                         </c:if>
                     </ul>
                     <button type="button" class="btn btn-info" onclick="location.href='/myweb/freeboard/freeRegist'">글쓰기</button>
-                    </div>
+                </div>
 
-                    <input type="hidden" name="pageNo" value="${pc.page.pageNo}">
-                    <input type="hidden" name="amount" value="${pc.page.amount}">
-                    <input type="hidden" name="keyword" value="${pc.page.keyword}">
-                    <input type="hidden" name="condition" value="${pc.page.condition}">
+                <input type="hidden" name="pageNo" value="${pc.page.pageNo}">
+                <input type="hidden" name="amount" value="${pc.page.amount}">
+                <input type="hidden" name="keyword" value="${pc.page.keyword}">
+                <input type="hidden" name="condition" value="${pc.page.condition}">
 
-          </form>
+		    </form>
 
                 </div>
             </div>
         </div>
-   </section>
-   
-   <%@ include file="../include/footer.jsp" %>
+	</section>
+	
+	<%@ include file="../include/footer.jsp" %>
 
     <script>
-
         //브라우저 창이 로딩이 완료된 후에 실행할 것을 보장하는 이벤트.
-        window.onload = function(){
+        window.onload = function() {
 
-            //사용자가 페이지 관련 버튼을 클릭했을 때 (이전, 다음, 1, 2, 3, 4, 5)
+            //사용자가 페이지 관련 버튼을 클릭했을 때 (이전, 다음, 1, 2, 3....)
             //a태그의 href에다가 각각 다른 url을 작성해서 요청을 보내기가 귀찮다.
             //클릭한 버튼이 무엇인지를 확인해서 그 버튼에 맞는 페이지 정보를
             //자바스크립트로 끌고 와서 요청을 보내 주겠다.
             document.getElementById('pagination').addEventListener('click', e => {
-                if(!e.target.matches('a')){
+                if(!e.target.matches('a')) {
                     return;
                 }
 
@@ -115,11 +116,15 @@
 
             });
 
-			const msg = '${msg}';
-			if(msg === 'searchFail') {
-				alert('검색 결과가 없었습니다.');
-			}
+            const msg = '${msg}';
+            if(msg === 'searchFail') {
+                alert('검색 결과가 없었습니다.');
+            }
+
+
 
         }
 
     </script>
+
+

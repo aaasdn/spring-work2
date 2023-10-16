@@ -2,11 +2,11 @@ package com.spring.myweb.freeboard.service;
 
 import java.util.List;
 
-import com.spring.myweb.freeboard.dto.FreeDetailResponseDTO;
-import com.spring.myweb.freeboard.dto.FreeListResponseDTO;
 import com.spring.myweb.freeboard.dto.page.Page;
 import com.spring.myweb.freeboard.dto.request.FreeModifyRequestDTO;
 import com.spring.myweb.freeboard.dto.request.FreeRegistRequestDTO;
+import com.spring.myweb.freeboard.dto.response.FreeDetailResponseDTO;
+import com.spring.myweb.freeboard.dto.response.FreeListResponseDTO;
 
 public interface IFreeBoardService {
 
