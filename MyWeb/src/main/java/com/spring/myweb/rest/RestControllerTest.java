@@ -39,7 +39,9 @@ public class RestControllerTest {
 	@PostMapping("/object")
 //	@ResponseBody
 	public Person object(@RequestBody Person p) {
-		System.out.println("비동기 방식의 요청 들어옴!");
+		System.out.println("비동"
+				+ ""
+				+ "기 방식의 요청 들어옴!");
 		System.out.println(p.toString());
 		
 		p.setName("변경이름");

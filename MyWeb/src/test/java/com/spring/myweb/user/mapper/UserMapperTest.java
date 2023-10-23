@@ -59,7 +59,19 @@ public class UserMapperTest {
 	@Test
 	@DisplayName("id를 제외한 회원의 정보를 수정할 수 있어야 한다.")
 	void updateTest() {
+		User user = User.builder()
+				.userId("abc1234")
+				.userPw("aaa1111!")
+				.userName("홍수정")
+				.userEmail1("abc4321")
+				.userEmail2("gmail.com")
+				.addrBasic("서울특별시 강동구")
+				.addrDetail("풍성로41길 64-19")
+				.addrZipNum("05383")
+				.build();
+		mapper.updateUser(user);
 		
+		assertEquals(user.getUserEmail1(), mapper.getInfo("abc1234").getUserEmail1());
 	}
 	
 	

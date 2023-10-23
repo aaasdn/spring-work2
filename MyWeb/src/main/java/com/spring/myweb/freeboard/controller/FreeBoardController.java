@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,8 +54,8 @@ public class FreeBoardController {
 	}
 	
 	//글 상세보기 처리
-	@GetMapping("/content")
-	public String getContent(int bno, 
+	@GetMapping("/content/{bno}")
+	public String getContent(@PathVariable int bno, 
 							Model model, 
 							@ModelAttribute("p") Page page) {
 		model.addAttribute("article", service.getContent(bno));
