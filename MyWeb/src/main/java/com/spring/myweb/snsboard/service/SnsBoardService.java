@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -79,7 +80,7 @@ public class SnsBoardService {
 									.pageNo(page)
 									.amount(3)
 									.build()); //페이지 객체 하나 전달.
-											   // 1페이지당 게시글 3개 전달.		
+											   //1페이지당 게시글 3개 전달.		
 		
 		for(SnsBoard board : list) {
 			dtoList.add(new SnsBoardResponseDTO(board));
@@ -88,6 +89,23 @@ public class SnsBoardService {
 		return dtoList;
 	}
 
+	public SnsBoardResponseDTO getContent(int bno) {
+		return new SnsBoardResponseDTO(mapper.getDetail(bno));
+	}
+
+	public void delete(int bno) {
+		mapper.delete(bno);
+	}
+	
+	public String searchLike(Map<String, String> params) {
+		if(mapper.searchLike(params) == 0) {
+			mapper.createLike(params);
+			return "like";
+		} else {
+			mapper.deleteLike(params);
+			return "delete";
+		}
+	}
 }
 
 
