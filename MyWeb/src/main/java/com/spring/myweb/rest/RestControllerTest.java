@@ -37,13 +37,13 @@ public class RestControllerTest {
    }
    
    @GetMapping("/api-req/{area1}/{area2}")
-   public void apiRequest(@PathVariable String area1, @PathVariable String area2) {
-      log.info("/api-req: GET, area1: {}, area2: {}", area1, area2);
-      
-      service.getShortTermForecast(area1, area2);
-      
-      
-   }
+	public void apiRequest(@PathVariable String area1, @PathVariable String area2) {
+		log.info("/api-req: GET, area1: {}, area2: {}", area1, area2);
+		
+		service.getShortTermForecast(area1, area2);
+		
+		
+	}
    
    
    
@@ -83,7 +83,7 @@ public class RestControllerTest {
    }
    
    @GetMapping("/hobby")
-//   @ResponseBody
+// @ResponseBody
    public List<String> hobby() {
       return Arrays.asList("축구", "영화감상", "수영");
    }
